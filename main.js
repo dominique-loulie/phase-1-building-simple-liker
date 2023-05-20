@@ -1,24 +1,24 @@
-// Defining text characters for the empty and full hearts for you to use later.
+// Defining text characters for the empty and full hearts => to use later.
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-//CODE STARTS HERE 
+//STARTS HERE => CODE
 const errorModel = document.getElementById('model') // Find error model
 errorModel.classList.add('hidden') // add class hidden to error model
 
 
-const heartClicked = (event) => { // events created for the hearts
+const heartClicked = (event) => { // events created => for hearts
   
   mimicServerCall()  // call mimicServer
   .then(()=>{  // if resolve 
-    if(event.target.textContent == EMPTY_HEART){  // check if heart is empty
-      event.target.textContent = FULL_HEART       // reassign content to full heart
-      event.target.classList.add('activated-heart') // add class to give colour heart
+    if(event.target.textContent == EMPTY_HEART){  // check if heart => empty
+      event.target.textContent = FULL_HEART       // reassign content => full heart
+      event.target.classList.add('activated-heart') // add class t=> give colour heart
     }else{
-      event.target.textContent = EMPTY_HEART      // reassign content to empty heart
-      event.target.classList.remove('activated-heart')   // remove class to colour heart
+      event.target.textContent = EMPTY_HEART      // reassign content => empty heart
+      event.target.classList.remove('activated-heart')   // remove class => colour heart
     }
 
   })
@@ -31,12 +31,12 @@ const heartClicked = (event) => { // events created for the hearts
   
 }
 
-let hearts = document.getElementsByClassName('like-glyph') //Search for all the avaiable hearts
+let hearts = document.getElementsByClassName('like-glyph') //Search for all => avaiable hearts
 for (let heart of hearts) { // loop thru the hearts
-  heart.addEventListener('click', heartClicked) //add event listener to hearts
+  heart.addEventListener('click', heartClicked) //add event listener => hearts
 }
 
-//CODE ENDS HERE
+//ENDS HERE => CODE
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
