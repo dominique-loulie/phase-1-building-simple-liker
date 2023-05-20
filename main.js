@@ -5,35 +5,35 @@ const FULL_HEART = '♥'
 // Your JavaScript code goes here!
 
 //STARTS HERE => CODE
-const errorModel = document.getElementById('model') // Find error model
-errorModel.classList.add('hidden') // add class hidden to error model
 
+const likeButtons = document.querySelectorAll('.like-glyph');
+const errorModal = document.querySelector('#modal'); // Find error modal
+const errorMessage = document.querySelector('#modal-message');
 
-const heartClicked = (event) => { // events created => for hearts
-  
-  mimicServerCall()  // call mimicServer
-  .then(()=>{  // if resolve 
-    if(event.target.textContent == EMPTY_HEART){  // check if heart => empty
-      event.target.textContent = FULL_HEART       // reassign content => full heart
-      event.target.classList.add('activated-heart') // add class t=> give colour heart
-    }else{
-      event.target.textContent = EMPTY_HEART      // reassign content => empty heart
-      event.target.classList.remove('activated-heart')   // remove class => colour heart
-    }
+errorModal.classList.add('hidden'); // add class hidden to error model
 
-  })
-  .catch(()=>{  // if server is reject
-    errorModel.classList.remove('hidden')  // Make appear error model
-    setTimeout(function(){  // Make dissapear error model after 3 seconds
-      errorModel.classList.add('hidden') // Make error model dissapear
-    }, 3000)
-  })
-  
+function toggleLike(event) {
+  const heart = event.target; //events created => for hearts
+  mimicServerCall() // call mimicServer
+    .then(() => { // if resolve 
+      heart.classList.toggle('activated-heart');
+      if (heart.classList.contains('activated-heart')) {
+        heart.innerText = '♥';
+      } else {
+        heart.innerText = '♡';
+      }
+    })
+    .catch(() => { // if server is reject
+      errorMessage.innerText = 'Oops! Something went wrong.'; 
+      errorModal.classList.remove('hidden'); // Make appear error model
+      setTimeout(() => { // Make dissapear error model after 3 seconds
+        errorModal.classList.add('hidden'); // Make error model dissapear
+      }, 3000);
+    });
 }
 
-let hearts = document.getElementsByClassName('like-glyph') //Search for all => avaiable hearts
-for (let heart of hearts) { // loop thru the hearts
-  heart.addEventListener('click', heartClicked) //add event listener => hearts
+for (const button of likeButtons) { // loop thru the hearts
+  button.addEventListener('click', toggleLike); //add event listener => hearts
 }
 
 //ENDS HERE => CODE
